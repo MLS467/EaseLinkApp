@@ -17,7 +17,7 @@ export const Category = (props: MyCategories) => {
     <Pressable style={styles.container} {...rest}>
       <MaterialIcons
         style={[styles.icon, { color: _colors }]}
-        size={32}
+        size={18}
         name={_icon}
       />
       <Text style={[styles.text, { color: _colors }]}>{_text}</Text>
