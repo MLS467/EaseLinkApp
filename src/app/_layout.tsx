@@ -14,6 +14,7 @@ export default function RootLayout() {
         }}
       >
         <Stack.Screen name="index/index" />
+        <Stack.Screen name="add/index" />
       </Stack>
     </SafeAreaView>
   );

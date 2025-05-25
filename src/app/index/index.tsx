@@ -1,4 +1,8 @@
+import { Link } from "@/components/link";
+import { Option } from "@/components/options";
+import { colors } from "@/styles/colors";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   FlatList,
@@ -8,14 +12,12 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Link } from "../../components/link";
-import { Option } from "../../components/options";
-import { colors } from "../../styles/colors";
-import { style } from "./index";
+import { style } from "./style";
 
-import { Categories } from "../../components/categories";
+import { Categories } from "@/components/categories";
 
 export default function Index() {
+  const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
 
   const testeLink = {
@@ -26,15 +28,8 @@ export default function Index() {
   return (
     <View style={style.container}>
       <View style={style.header}>
-        <Image
-          style={style.logo}
-          source={require("../assets/image/logo.png")}
-        />
-        <TouchableOpacity
-          onPress={() => {
-            console.log("Testando...dsadasd");
-          }}
-        >
+        <Image style={style.logo} source={require("@/assets/image/logo.png")} />
+        <TouchableOpacity onPress={() => router.push("/add")}>
           <MaterialIcons name="add" size={32} color={colors.green[300]} />
         </TouchableOpacity>
       </View>
@@ -77,9 +72,12 @@ export default function Index() {
               onDetails={() => console.log("batata")}
             />
           </View>
+
           <View style={style.containerOption}>
-            <Option icon="delete" name="Deletar" variant="primary" />
-            <Option icon="language" name="Abrir" variant="secondary" />
+            <View style={style.header}>
+              <Option icon="delete" name="Deletar" variant="primary" />
+              <Option icon="language" name="Abrir" variant="secondary" />
+            </View>
           </View>
         </View>
       </Modal>
