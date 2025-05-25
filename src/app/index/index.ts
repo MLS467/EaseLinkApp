@@ -5,8 +5,6 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 62,
-
-    paddingHorizontal: 24,
   },
   text: {
     fontSize: 20,
@@ -17,13 +15,45 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    // borderWidth: 1,
-    // borderColor: "red",
     marginBottom: 20,
-    padding: 10,
+    paddingHorizontal: 24,
   },
   logo: {
     width: 32,
     height: 38,
+  },
+  containerList: {
+    borderTopWidth: 1,
+    borderTopColor: colors.gray[600],
+  },
+  contentList: {
+    gap: 20,
+    padding: 24,
+    paddingBottom: 100,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+  modalContent: {
+    borderTopWidth: 1,
+    borderTopColor: colors.gray[900],
+  },
+  modalTitle: {
+    fontSize: 22,
+    color: colors.gray[300],
+  },
+  modalHeader: {
+    padding: 10,
+    alignItems: "center",
+    flexDirection: "row",
+    backgroundColor: colors.gray[900],
+    justifyContent: "space-between",
+  },
+  modalUrl: {
+    backgroundColor: colors.gray[900],
+    alignItems: "center",
+    paddingVertical: 30,
+    paddingHorizontal: 15,
   },
 });
