@@ -1,7 +1,7 @@
 import { colors } from "@/styles/colors";
 import { StyleSheet } from "react-native";
 
-export const styles = StyleSheet.create({
+export const style = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 62,
@@ -53,7 +53,14 @@ export const styles = StyleSheet.create({
   modalUrl: {
     backgroundColor: colors.gray[900],
     alignItems: "center",
-    paddingVertical: 30,
+    paddingVertical: 15,
     paddingHorizontal: 15,
+  },
+  containerOption: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    backgroundColor: colors.gray[900],
   },
 });

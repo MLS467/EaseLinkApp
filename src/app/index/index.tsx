@@ -9,8 +9,9 @@ import {
   View,
 } from "react-native";
 import { Link } from "../../components/link";
+import { Option } from "../../components/options";
 import { colors } from "../../styles/colors";
-import { styles } from "./index";
+import { style } from "./index";
 
 import { Categories } from "../../components/categories";
 
@@ -23,10 +24,10 @@ export default function Index() {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <View style={style.container}>
+      <View style={style.header}>
         <Image
-          style={styles.logo}
+          style={style.logo}
           source={require("../assets/image/logo.png")}
         />
         <TouchableOpacity
@@ -50,16 +51,15 @@ export default function Index() {
             onDetails={() => setIsVisible(true)}
           />
         )}
-        style={styles.containerList}
-        contentContainerStyle={styles.contentList}
+        style={style.containerList}
+        contentContainerStyle={style.contentList}
         showsVerticalScrollIndicator={true}
       />
-
       <Modal transparent visible={isVisible}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHeader}>
-              <Text style={styles.modalTitle}>Curso</Text>
+        <View style={style.modalContainer}>
+          <View style={style.modalContent}>
+            <View style={style.modalHeader}>
+              <Text style={style.modalTitle}>Curso</Text>
               <TouchableOpacity onPress={() => setIsVisible(false)}>
                 <MaterialIcons
                   name="close"
@@ -70,12 +70,16 @@ export default function Index() {
             </View>
           </View>
 
-          <View style={styles.modalUrl}>
+          <View style={style.modalUrl}>
             <Link
               _name="batata"
               url="www.teste.com.br"
               onDetails={() => console.log("batata")}
             />
+          </View>
+          <View style={style.containerOption}>
+            <Option icon="delete" name="Deletar" variant="primary" />
+            <Option icon="language" name="Abrir" variant="secondary" />
           </View>
         </View>
       </Modal>
