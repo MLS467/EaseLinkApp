@@ -2,10 +2,11 @@ import { Button } from "@/components/button";
 import { Categories } from "@/components/categories";
 import Input from "@/components/Input";
 import { colors } from "@/styles/colors";
+import { categories } from "@/utils/categories";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { style } from "./style";
 
 type valueUrl = {
@@ -15,6 +16,7 @@ type valueUrl = {
 
 const Add = () => {
   const router = useRouter();
+  const [category, setCategory] = useState(categories[0].name);
   const [InputValue, setInputValue] = useState<valueUrl>({
     nameValue: "",
     urlValue: "",
@@ -22,7 +24,26 @@ const Add = () => {
 
   const handleInput = (key: keyof valueUrl, value: string) => {
     setInputValue((prev) => ({ ...prev, [key]: value }));
-    console.log(InputValue);
+  };
+
+  const handleSaveData = () => {
+    try {
+      if (!category) {
+        throw new Error("Informe a categoria");
+      }
+
+      if (!InputValue.nameValue.trim()) {
+        throw new Error("Informe o nome");
+      }
+
+      if (!InputValue.urlValue.trim()) {
+        throw new Error("Informe a url");
+      }
+
+      console.log({ ...InputValue, category: category });
+    } catch (error: any) {
+      Alert.alert("erro", error.message);
+    }
   };
 
   return (
@@ -42,7 +63,7 @@ const Add = () => {
         <Text style={style.addTitle}>Novo</Text>
       </View>
 
-      <Categories />
+      <Categories selected={category} onChange={setCategory} />
 
       <View style={style.form}>
         <Input
@@ -53,7 +74,7 @@ const Add = () => {
           _placeholder="URL"
           onChangeText={(value) => handleInput("urlValue", value)}
         />
-        <Button title="Adicionar" onPress={() => alert("Voce clicou!!!")} />
+        <Button title="Adicionar" onPress={handleSaveData} />
       </View>
     </View>
   );
