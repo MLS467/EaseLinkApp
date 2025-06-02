@@ -52,9 +52,10 @@ export const style = StyleSheet.create({
   },
   modalUrl: {
     backgroundColor: colors.gray[900],
-    alignItems: "center",
+    alignItems: "flex-start",
     paddingVertical: 15,
     paddingHorizontal: 15,
+    borderWidth: 1,
   },
   containerOption: {
     flexDirection: "row",
@@ -62,5 +63,13 @@ export const style = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     backgroundColor: colors.gray[900],
+  },
+  ModalTitle: {
+    fontSize: 22,
+    color: colors.gray[300],
+  },
+  ModalUrl: {
+    fontSize: 12,
+    color: colors.gray[300],
   },
 });

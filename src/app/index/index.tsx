@@ -1,12 +1,17 @@
+import { Categories } from "@/components/categories";
 import { Link } from "@/components/link";
 import { Option } from "@/components/options";
+import { LinkStorage, Storage } from "@/storage/links_storage";
 import { colors } from "@/styles/colors";
+import { categories } from "@/utils/categories";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useFocusEffect, useRouter } from "expo-router";
+import { useCallback, useState } from "react";
 import {
+  Alert,
   FlatList,
   Image,
+  Linking,
   Modal,
   Text,
   TouchableOpacity,
@@ -14,15 +19,61 @@ import {
 } from "react-native";
 import { style } from "./style";
 
-import { Categories } from "@/components/categories";
-
 export default function Index() {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
+  const [category, setCategory] = useState(categories[0].name);
+  const [links, setLinks] = useState<LinkStorage[]>();
+  const [selectedLink, setSelectedLink] = useState<LinkStorage>();
 
-  const testeLink = {
-    url: "https://www.google.com.br/search?q=cachorro+fofo&sca_esv=fa723bccb4ce9e36&hl=pt-BR&authuser=0&sxsrf=AE3TifONMGFJpoHutjUOY1NY8oZyRFNPow:1748118677858&source=hp&biw=1366&bih=645&ei=lSwyaMnpMNTR1sQPo4i94QU&iflsig=AOw8s4IAAAAAaDI6pQClHtqk17Pu9OnnYW40AbXPlrPO&udm=2#vhid=3EQfxM2BWf9W_M&vssid=mosaic",
-    name: "Cachorro fofo",
+  useFocusEffect(
+    // useFocusEffect é usado para executar uma função quando a tela é focada
+    // Isso é útil para atualizar os links sempre que a tela for exibida
+    useCallback(() => {
+      //useCallback é usado para memorizar a função e evitar recriações desnecessárias
+      (async () => {
+        const result = await Storage.get();
+        const filteredLinks = result.filter(
+          (link) => link.category === category
+        );
+        setLinks(filteredLinks);
+      })();
+    }, [category, links])
+  );
+
+  // Função para lidar com a exibição dos detalhes do link selecionado
+  const handleShowDetails = (selected: LinkStorage): void => {
+    setSelectedLink(selected);
+    setIsVisible(true);
+  };
+
+  const deleteLink = async (id: string): Promise<void> => {
+    try {
+      Alert.alert("Deletar", "Deseja deletar esse link ?", [
+        { text: "Cancelar", style: "cancel" },
+        {
+          text: "Deletar",
+          style: "destructive",
+          onPress: () => {
+            Storage.deleted(id);
+            setIsVisible(false);
+          },
+        },
+      ]);
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível deletar o link.");
+      console.error("Erro ao deletar o link:", error);
+    }
+  };
+
+  const linkOpen = async () => {
+    try {
+      Linking.openURL(selectedLink?.url || "");
+      setIsVisible(false);
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível abrir o link.");
+      console.error("Erro ao abrir o link:", error);
+    }
   };
 
   return (
@@ -34,23 +85,25 @@ export default function Index() {
         </TouchableOpacity>
       </View>
 
-      <Categories />
+      <Categories onChange={setCategory} selected={category} />
 
       <FlatList
-        data={["1", "2", "3"]}
-        keyExtractor={(item) => item}
-        renderItem={() => (
+        data={links}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
           <Link
-            _name={testeLink.name}
-            url={testeLink.url}
-            onDetails={() => setIsVisible(true)}
+            _name={item.name}
+            url={item.url}
+            item={item}
+            onDetails={(item) => handleShowDetails(item)}
           />
         )}
         style={style.containerList}
         contentContainerStyle={style.contentList}
         showsVerticalScrollIndicator={true}
       />
-      <Modal transparent visible={isVisible}>
+
+      <Modal transparent visible={isVisible} animationType="slide">
         <View style={style.modalContainer}>
           <View style={style.modalContent}>
             <View style={style.modalHeader}>
@@ -66,17 +119,28 @@ export default function Index() {
           </View>
 
           <View style={style.modalUrl}>
-            <Link
-              _name="batata"
-              url="www.teste.com.br"
-              onDetails={() => console.log("batata")}
-            />
+            <Text style={style.ModalTitle} numberOfLines={1}>
+              {selectedLink?.name}
+            </Text>
+            <Text style={style.ModalUrl} numberOfLines={1}>
+              {selectedLink?.url}
+            </Text>
           </View>
 
           <View style={style.containerOption}>
             <View style={style.header}>
-              <Option icon="delete" name="Deletar" variant="primary" />
-              <Option icon="language" name="Abrir" variant="secondary" />
+              <Option
+                icon="delete"
+                name="Deletar"
+                variant="primary"
+                onPress={() => selectedLink && deleteLink(selectedLink.id)}
+              />
+              <Option
+                icon="language"
+                name="Abrir"
+                variant="secondary"
+                onPress={linkOpen}
+              />
             </View>
           </View>
         </View>
