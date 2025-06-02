@@ -1,50 +1,58 @@
-# Welcome to your Expo app 👋
+# 📱 easeLink
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**easeLink** é um app mobile desenvolvido como parte prática do **curso introdutório de React Native da Rocketseat**. Ele permite armazenar, listar e remover links importantes localmente no dispositivo, usando `AsyncStorage`. O projeto tem foco educacional, voltado para a fixação de conceitos básicos do React Native com Expo.
 
-## Get started
+---
 
-1. Install dependencies
+## 📌 Descrição Rápida
 
-   ```bash
-   npm install
-   ```
+> App criado durante o minicurso de React Native da Rocketseat para treinar os fundamentos da tecnologia. Permite salvar, listar e remover links com armazenamento local via AsyncStorage.
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 🧠 Objetivo
 
-In the output, you'll find options to open the app in a
+Desenvolver um aplicativo simples e funcional com React Native e Expo, com foco no aprendizado de:
+- Componentes e navegação com **Expo Router**
+- Tipagem com **TypeScript**
+- Estilização com **StyleSheet**
+- Persistência de dados com **AsyncStorage**
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🚀 Tecnologias Utilizadas
 
-## Get a fresh project
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+- [Expo Router](https://expo.dev/router)
+- [AsyncStorage](https://react-native-async-storage.github.io/async-storage/)
+- [TypeScript](https://www.typescriptlang.org/)
+- `StyleSheet` para estilização nativa
 
-When you're ready, run:
+---
+
+## 🔧 Funcionalidades
+
+- ✅ Adicionar novos links
+- 📋 Listar links salvos
+- 🗑️ Remover links
+- 💾 Armazenamento local com `AsyncStorage`
+- 💡 Interface responsiva e minimalista
+
+---
+
+## ▶️ Como Rodar o App
 
 ```bash
-npm run reset-project
+git clone https://github.com/seu-usuario/easeLink.git
+cd easeLink
+npm install
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 📜 Certificado de Conclusão
 
-## Learn more
+Curso: *Minicurso de React Native (Rocketseat)*  
+Concluído em: 02/06/2025  
+🔗 [Ver certificado de conclusão](https://drive.google.com/file/d/1wSvdrobi_sN1cUPE1S0ysX0YWpjoM66F/view?usp=sharing)
 
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
